@@ -1,0 +1,33 @@
+---
+title: "Pilot Study: Parking in Downtown Seattle"
+output: html_notebook
+---
+
+```{r, include=FALSE}
+#install any missing dependencies
+#install.packages("dplyr")
+#install.packages("ggplot2")
+
+#import libraries
+library("dplyr")
+library("ggplot2")
+
+#set working directory
+#setwd("~/University of Washington/Senior/Fall/Info 370/project-es3/pilot_study")
+```
+
+
+```{r}
+mydata <- read.csv("parking_data.csv")
+
+#ggplot(data = mydata, aes(x = mydata$Congestion, y = mydata$X8AM.7PM.Parking.Occupancy, colour = "1"))
+parking.occupancy = mydata$X8AM.7PM.Parking.Occupancy
+
+parking.occupancy <- parking.occupancy[!is.na(parking.occupancy)]
+print(parking.occupancy * 100)
+
+ggplot(data = mydata) + geom_point(mapping = aes(x = mydata$Year, y = (mydata$X8AM.7PM.Parking.Occupancy * 100), color = mydata$Congestion)) + labs(title = "Relationship between Congestion and Parking Occupancy", x = "Year", y = "Parking Occupancy (%)", color = "Average weekday traffic")
+
+
+```
+
