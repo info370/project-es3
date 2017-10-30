@@ -55,7 +55,7 @@ We identified curbs with an original key. It can be decomposed as follows:
 ** D: the side of the street closer to the larger number street
 
 ## Conclusions
-Our group decided it was most pressing - as well as most realistic given the time frame - to address the question of parking occupancy vs. congestion. We constructed the following chart in an attempt to answer it.
+Our group decided it was most pressing - as well as most realistic given the time frame - to address the question of parking cost vs. congestion. We constructed the following chart in an attempt to answer it.
 
 ```{r}
 # clean the data
