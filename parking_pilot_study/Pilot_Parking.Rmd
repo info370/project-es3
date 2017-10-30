@@ -18,7 +18,7 @@ library("ggplot2")
 
 
 ```{r}
-mydata <- read.csv("parking_data.csv")
+mydata <- read.csv("Parking_Pilot_Study_Data.csv")
 
 #ggplot(data = mydata, aes(x = mydata$Congestion, y = mydata$X8AM.7PM.Parking.Occupancy, colour = "1"))
 parking.occupancy = mydata$X8AM.7PM.Parking.Occupancy
