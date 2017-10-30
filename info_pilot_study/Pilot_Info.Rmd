@@ -3,26 +3,32 @@ title: "Pilot Study: Post Undergrad Info Jobs"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# How can we increase the rate of employment for Informatics students at UW?
+
+The goal of this research question is to use data including and relevant to rate of employment for INFO students in order to better understand what methods (career fairs, LinkedIn, info sessions, etc.) are most effective at driving employment. The choices informed by this research will encompass the type and frequency of events the iSchool hosts. Our findings could also help current iSchool students decide which of these job search methods they should invest the majority of their time and effort in preparing for and attending. 
+
+
+## Uncertainties & Assumptions
+* The rate of employment for UW Informatics students is low
+* Inability to find employment post undergrad is a problem for UW Informatics students (maybe they all want to go to grad school)
+* iSchool staff aren't already doing data driven event organization
+* iSchool students struggle with preparing for all job search methods
+* Are there any job search methods we're missing?
+
+## Pilot Study
+Our group surveyed a total of 24 Informatics students (13 current students and 11 alumni) to find out more about their job search experiences. The participants self selected into the study by clicking on the link posted to the UW Informatics Facebook group. If we continue to pursue this research question, we would want to collect data from a more robust sample. However, this smaller sample can still provide some insight about our initial uncertainties.  
+
+## Conclusions
+Our data analysis so far focused on the stress experienced by students searching for jobs. We wanted to confirm that a significant number of students do find job searching to be a stressful process before pursuing this topic. We found that 33.3% of students found the job searching to be very stressful, 45.8% thought it was somewhat strssful, and only 20.8% thought that it was not stressful. In light of these findings, our research question does merit additional study.  
+
+```{r}
+#import libraries
+library("plotly")
+
+stress_data <- read.csv("stress.csv")
+#View(stress_data)
+stress_data <- as.data.frame.table(table(stress_data))
+plot_ly(stress_data, labels = ~stress_data, values = ~Freq, type = 'pie') %>%
+  layout(title = 'Informatics students and alumni job search stress')
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
