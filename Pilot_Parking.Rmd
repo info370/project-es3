@@ -3,28 +3,22 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
 #Load data
-mydata <- read.csv("/Users/Gurman/Desktop/Milestone-2/Parking_Pilot_Study_Data.csv")
+mydata <- read.csv("Parking_Pilot_Study_Data.csv")
 View(mydata)
 
-install.packages("MASS")
+#install.packages("MASS")
 library("MASS") # access to Boston data frame
-data(mtcars) # data on motor trend car road tests
 
-install.packages("dplyr")
+#install.packages("dplyr")
 library("dplyr") # data wrangling package. See Chapter 10 in INFO 201 textbook
-install.packages("ggplot2")
+#install.packages("ggplot2")
 # plotting library. See Chapter 13 of INFO 201 textbook
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
 ```{r}
 library("ggplot2") 
 #ggplot(data = mydata, aes(x = mydata$Congestion, y = mydata$X8AM.7PM.Parking.Occupancy, colour = "1"))
@@ -33,7 +27,7 @@ parking.occupancy = mydata$X8AM.7PM.Parking.Occupancy
 parking.occupancy <- parking.occupancy[!is.na(parking.occupancy)]
 print(parking.occupancy * 100)
 
-ggplot(data = mydata) + geom_point(mapping = aes(x = mydata$Year, y = (mydata$X8AM.7PM.Parking.Occupancy * 100), color = mydata$Congestion)) + labs(title = "Relationship between Congestion and Parking Occupancy", x = "Year", y = "Parking Occupancy (%)", color = "Congestion")
+ggplot(data = mydata) + geom_point(mapping = aes(x = mydata$Year, y = (mydata$X8AM.7PM.Parking.Occupancy * 100), color = mydata$Congestion)) + labs(title = "Relationship between Congestion and Parking Occupancy", x = "Year", y = "Parking Occupancy (%)", color = "Average weekday traffic")
 
 
 ```
