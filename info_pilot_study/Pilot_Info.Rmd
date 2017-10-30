@@ -32,7 +32,7 @@ Our group surveyed a total of 24 Informatics students (13 current students and 1
 ## Conclusions
 Our data analysis so far focused on the stress experienced by students searching for jobs. We wanted to confirm that a significant number of students do find job searching to be a stressful process before pursuing this topic. We found that 33.3% of students found job searching to be very stressful, 45.8% thought it was somewhat stressful, and only 20.8% thought that it was not stressful. In light of these findings, our research question does merit additional study.  
 
-```{r, message=F}
+```{r, message=FALSE, warning=FALSE}
 #import data
 stress_data <- read.csv("stress.csv")
 
@@ -45,4 +45,3 @@ plot_ly(stress_data, labels = ~stress_data, values = ~Freq, type = 'pie') %>%
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 ```
-

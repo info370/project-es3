@@ -139,22 +139,24 @@ $(document).ready(function () {
 </div>
 <div id="pilot-study" class="section level2">
 <h2>Pilot Study</h2>
-<p>Our group surveyed a total of 24 Informatics students (13 current students and 11 alumni) to find out more about their job search experiences. The participants self selected into the study by clicking on the link posted to the UW Informatics Facebook group. If we continue to pursue this research question, we would want to collect data from a more robust sample. However, this smaller sample can still provide some insight about our initial uncertainties.</p>
+<p>Our group surveyed a total of 24 Informatics students (13 current students and 11 alumni) using Google Forms to find out more about their job search experiences. The participants self selected into the study by clicking on the link posted to the UW Informatics Facebook group. If we continue to pursue this research question, we would want to collect data from a more robust sample. However, this smaller sample can still provide some insight about our initial uncertainties.</p>
 </div>
 <div id="conclusions" class="section level2">
 <h2>Conclusions</h2>
 <p>Our data analysis so far focused on the stress experienced by students searching for jobs. We wanted to confirm that a significant number of students do find job searching to be a stressful process before pursuing this topic. We found that 33.3% of students found job searching to be very stressful, 45.8% thought it was somewhat stressful, and only 20.8% thought that it was not stressful. In light of these findings, our research question does merit additional study.</p>
-<pre class="r"><code>#import libraries
-library(&quot;plotly&quot;)</code></pre>
-<pre><code>## Warning: package 'ggplot2' was built under R version 3.3.3</code></pre>
-<pre class="r"><code>stress_data &lt;- read.csv(&quot;stress.csv&quot;)
-#View(stress_data)
+<pre class="r"><code>#import data
+stress_data &lt;- read.csv(&quot;stress.csv&quot;)
+
+#clean data
 stress_data &lt;- as.data.frame.table(table(stress_data))
+
+#plot
 plot_ly(stress_data, labels = ~stress_data, values = ~Freq, type = 'pie') %&gt;%
-  layout(title = 'Informatics students and alumni job search stress')</code></pre>
-<pre><code>## Warning: package 'bindrcpp' was built under R version 3.3.3</code></pre>
-<div id="htmlwidget-2c998933e04fb5eb0cae" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2c998933e04fb5eb0cae">{"x":{"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Informatics students and alumni job search stress","xaxis":{"domain":[0,1]},"yaxis":{"domain":[0,1]}},"config":{"modeBarButtonsToRemove":["sendDataToCloud"]},"base_url":"https://plot.ly","source":"A","data":[{"labels":["No, not stressful","Yes, somewhat stressful","Yes, very stressful"],"values":[5,11,8],"type":"pie","marker":{"fillcolor":"rgba(31,119,180,1)","color":"rgba(31,119,180,1)","line":{"color":"transparent"}}}]},"evals":[],"jsHooks":[]}</script>
+  layout(title = 'Informatics students and alumni job search stress',
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))</code></pre>
+<div id="htmlwidget-77d2984f3d34ac4d16bf" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77d2984f3d34ac4d16bf">{"x":{"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Informatics students and alumni job search stress","xaxis":{"domain":[0,1],"showgrid":false,"zeroline":false,"showticklabels":false},"yaxis":{"domain":[0,1],"showgrid":false,"zeroline":false,"showticklabels":false}},"config":{"modeBarButtonsToRemove":["sendDataToCloud"]},"base_url":"https://plot.ly","source":"A","data":[{"labels":["No, not stressful","Yes, somewhat stressful","Yes, very stressful"],"values":[5,11,8],"type":"pie","marker":{"fillcolor":"rgba(31,119,180,1)","color":"rgba(31,119,180,1)","line":{"color":"transparent"}}}]},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
