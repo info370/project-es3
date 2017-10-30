@@ -19,9 +19,9 @@ The goal of this research question is to use data including and relevant to rate
 Our group surveyed a total of 24 Informatics students (13 current students and 11 alumni) to find out more about their job search experiences. The participants self selected into the study by clicking on the link posted to the UW Informatics Facebook group. If we continue to pursue this research question, we would want to collect data from a more robust sample. However, this smaller sample can still provide some insight about our initial uncertainties.  
 
 ## Conclusions
-Our data analysis so far focused on the stress experienced by students searching for jobs. We wanted to confirm that a significant number of students do find job searching to be a stressful process before pursuing this topic. We found that 33.3% of students found the job searching to be very stressful, 45.8% thought it was somewhat strssful, and only 20.8% thought that it was not stressful. In light of these findings, our research question does merit additional study.  
+Our data analysis so far focused on the stress experienced by students searching for jobs. We wanted to confirm that a significant number of students do find job searching to be a stressful process before pursuing this topic. We found that 33.3% of students found the job searching to be very stressful, 45.8% thought it was somewhat stressful, and only 20.8% thought that it was not stressful. In light of these findings, our research question does merit additional study.  
 
-```{r}
+```{r message=F}
 #import libraries
 library("plotly")
 
