@@ -32,11 +32,13 @@ data <- data %>%
 # split into training and test datasets
 # (filter out people just beginning job search (no job, searching for < 3 mo.))
 train <- data %>%
-  filter(None_of_these == 0 | None_of_these == 1 & Months == 0) # | has_position == 0 & Months == 0
-
+  filter(None_of_these == 0 | None_of_these == 1 & Months == 0) %>% # | has_position == 0 & Months == 0
+  select(-None_of_these)
+  
 ### !! NEED MORE TEST DATA !! ###
 test <- data %>%
-  filter(None_of_these == 1 & Months == 1) # | has_position == 0 & Months == 1
+  filter(None_of_these == 1 & Months == 1) %>% # | has_position == 0 & Months == 1
+  select(-None_of_these)
 
 # create decision tree
 ### !! INVESTIGATE RPART CONTROL !! ###
