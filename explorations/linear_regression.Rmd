@@ -1,0 +1,37 @@
+---
+title: "Scatter_plots"
+author: "Sarah Loftis"
+date: "November 30, 2017"
+output: html_document
+---
+
+```{r }
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+#setwd('~/git-repos/project-es3')
+#getwd()
+data <- read.csv("./data/370_clean_num_2.csv") #has more records than clean_num
+
+#linear regression for each factor against the outcome variable (months it takes to find job)
+for (i in 1:ncol(data)){
+  print(ggplot(data, aes(x = data[[i]], y = months)) +
+    geom_point(alpha = 0.1) +
+    geom_smooth(method=lm) +
+      geom_jitter() +
+      labs(x = colnames(data)[i]))
+}
+
+#additional gpa graphs to remove values of 0.0 for GPA
+ggplot(data, aes(x = major_GPA, y = months)) +
+  geom_point(alpha = 0.1 ) + 
+  xlim(2,4) +
+  geom_smooth(method=lm) 
+
+ggplot(data, aes(x = cumulative_GPA, y = months)) +
+  geom_point(alpha = 0.1 ) + 
+  xlim(2,4) +
+  geom_smooth(method=lm) 
+```
+
+
