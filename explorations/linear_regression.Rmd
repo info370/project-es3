@@ -10,10 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
 #setwd('~/git-repos/project-es3')
-#getwd()
-data <- read.csv("./data/370_clean_num_2.csv") #has more records than clean_num
+data <- read.csv("../data/370_clean_num_2.csv") #has more records than clean_num
 
 #linear regression for each factor against the outcome variable (months it takes to find job)
+#internship = 1, part time = 2, full time = 3
+#female = 1, male = 0
 for (i in 1:ncol(data)){
   print(ggplot(data, aes(x = data[[i]], y = months)) +
     geom_point(alpha = 0.1) +

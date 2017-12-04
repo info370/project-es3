@@ -6,7 +6,7 @@ library(rattle)
 
 setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
-data <- read.csv('./data/clean_num.csv')
+data <- read.csv('../data/clean_num.csv')
 
 # reformat data
 data <- data %>%
