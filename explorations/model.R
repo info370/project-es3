@@ -1,8 +1,10 @@
+#install.packages("rpart.plot")
 #install.packages("rattle")
 #install.packages("https://cran.r-project.org/bin/windows/contrib/3.3/RGtk2_2.20.31.zip", repos=NULL)
 library(dplyr)
 library(rpart)
 library(rattle)
+library(rpart.plot)
 
 setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
@@ -44,8 +46,11 @@ test <- data %>%
 
 # create decision tree
 ### !! INVESTIGATE RPART CONTROL !! ###
-tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minsplit=2, minbucket=1, cp=0.001))
+tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minsplit=10, minbucket=5, cp=0.01))
 fancyRpartPlot(tree)
+?rpart
 
 # make predictions
 predict(tree, test)
+?predict
+
