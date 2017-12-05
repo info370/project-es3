@@ -1,14 +1,12 @@
-#install.packages("rpart.plot")
 #install.packages("rattle")
 #install.packages("https://cran.r-project.org/bin/windows/contrib/3.3/RGtk2_2.20.31.zip", repos=NULL)
 library(dplyr)
 library(rpart)
 library(rattle)
-library(rpart.plot)
 
 setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
-data <- read.csv('../data/clean_num.csv')
+data <- read.csv('data/clean_num.csv')
 
 # reformat data
 data <- data %>%
@@ -36,21 +34,16 @@ data <- data %>%
 # split into training and test datasets
 # (filter out people just beginning job search (no job, searching for < 3 mo.))
 train <- data %>%
-  filter(None_of_these == 0 | None_of_these == 1 & Months == 0) %>% # | has_position == 0 & Months == 0
-  select(-None_of_these)
+  filter((has_position == 0 & Months == 0) | (None_of_these == 1 & Months == 0) | has_position == 1 | None_of_these == 0) %>%
+  select(-None_of_these, -has_position)
   
-### !! NEED MORE TEST DATA !! ###
 test <- data %>%
-  filter(None_of_these == 1 & Months == 1) %>% # | has_position == 0 & Months == 1
-  select(-None_of_these)
+  filter((has_position == 0 & Months == 1) | (None_of_these == 1 & Months == 1) ) %>%
+  select(-None_of_these, -has_position)
 
 # create decision tree
-### !! INVESTIGATE RPART CONTROL !! ###
-tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minsplit=10, minbucket=5, cp=0.01))
+tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minbucket=4))
 fancyRpartPlot(tree)
-?rpart
 
 # make predictions
 predict(tree, test)
-?predict
-
