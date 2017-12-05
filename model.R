@@ -6,7 +6,7 @@ library(rattle)
 
 setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
-data <- read.csv('../data/clean_num.csv')
+data <- read.csv('data/clean_num.csv')
 
 # reformat data
 data <- data %>%
@@ -34,17 +34,15 @@ data <- data %>%
 # split into training and test datasets
 # (filter out people just beginning job search (no job, searching for < 3 mo.))
 train <- data %>%
-  filter(None_of_these == 0 | None_of_these == 1 & Months == 0) %>% # | has_position == 0 & Months == 0
-  select(-None_of_these)
+  filter((has_position == 0 & Months == 0) | (None_of_these == 1 & Months == 0) | has_position == 1 | None_of_these == 0) %>%
+  select(-None_of_these, -has_position)
   
-### !! NEED MORE TEST DATA !! ###
 test <- data %>%
-  filter(None_of_these == 1 & Months == 1) %>% # | has_position == 0 & Months == 1
-  select(-None_of_these)
+  filter((has_position == 0 & Months == 1) | (None_of_these == 1 & Months == 1) ) %>%
+  select(-None_of_these, -has_position)
 
 # create decision tree
-### !! INVESTIGATE RPART CONTROL !! ###
-tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minsplit=2, minbucket=1, cp=0.001))
+tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minbucket=4))
 fancyRpartPlot(tree)
 
 # make predictions
