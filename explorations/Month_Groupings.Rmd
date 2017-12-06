@@ -10,7 +10,7 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 
 ```{r}
 library(ggplot2)
-data <- read.csv("../data/clean_num_BS-BA.csv")
+data <- read.csv("../data/clean_num.csv")
 LessFive <- filter(data, Months < 5)
 
 for (i in 1:ncol(LessFive)){
