@@ -177,28 +177,24 @@ $(document).ready(function () {
 <p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Cmd+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcblxuYGBgIn0= -->
-<pre class="r"><code>library(dplyr)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShkcGx5cilcbmRhdGEgPC0gcmVhZC5jc3YoXCIuLi9kYXRhL2NsZWFuX251bS5jc3ZcIilcbkxlc3NGaXZlIDwtIGZpbHRlcihkYXRhLCBNb250aHMgPCAzKVxuXG5mb3IgKGkgaW4gMTpuY29sKExlc3NGaXZlKSl7XG4gIHByaW50KGdncGxvdChMZXNzRml2ZSwgYWVzKHggPSBMZXNzRml2ZVtbaV1dLCB5ID0gTGVzc0ZpdmUkTW9udGhzKSkgK1xuICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgK1xuICAgIGxhYnMoeCA9IGNvbG5hbWVzKExlc3NGaXZlKVtpXSkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+data &lt;- read.csv(&quot;../data/clean_num.csv&quot;)
+LessFive &lt;- filter(data, Months &lt; 3)
+
+for (i in 1:ncol(LessFive)){
+  print(ggplot(LessFive, aes(x = LessFive[[i]], y = LessFive$Months)) +
+    geom_smooth(method=lm) +
+    labs(x = colnames(LessFive)[i]))
+}</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog46S847ixZHBseXLjpLzjuLJcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDjpLzjuLFwYWNrYWdlOnN0YXRz46S847iyOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDjpLzjuLFwYWNrYWdlOmJhc2XjpLzjuLI6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
-<pre><code>
-Attaching package: &lt;U+393C&gt;&lt;U+3E31&gt;dplyr&lt;U+393C&gt;&lt;U+3E32&gt;
-
-The following objects are masked from &lt;U+393C&gt;&lt;U+3E31&gt;package:stats&lt;U+393C&gt;&lt;U+3E32&gt;:
-
-    filter, lag
-
-The following objects are masked from &lt;U+393C&gt;&lt;U+3E31&gt;package:base&lt;U+393C&gt;&lt;U+3E32&gt;:
-
-    intersect, setdiff, setequal, union</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTW9yZUZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA+IDUpXG5cbmZvciAoaSBpbiAxOm5jb2woTW9yZUZpdmUpKXtcbiAgcHJpbnQoZ2dwbG90KE1vcmVGaXZlLCBhZXMoeCA9IE1vcmVGaXZlW1tpXV0sIHkgPSBNb3JlRml2ZSRNb250aHMpKSArXG4gICAgZ2VvbV9zbW9vdGgobWV0aG9kPWxtKSArXG4gICAgbGFicyh4ID0gY29sbmFtZXMoTW9yZUZpdmUpW2ldKSlcbn1cbmBgYCJ9 -->
-<pre class="r"><code>MoreFive &lt;- filter(data, Months &gt; 5)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTW9yZUZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8IDYgJiBNb250aHMgPiAzKVxuXG5mb3IgKGkgaW4gMTpuY29sKE1vcmVGaXZlKSl7XG4gIHByaW50KGdncGxvdChNb3JlRml2ZSwgYWVzKHggPSBNb3JlRml2ZVtbaV1dLCB5ID0gTW9yZUZpdmUkTW9udGhzKSkgK1xuICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgK1xuICAgIGxhYnMoeCA9IGNvbG5hbWVzKE1vcmVGaXZlKVtpXSkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>MoreFive &lt;- filter(data, Months &lt; 6 &amp; Months &gt; 3)
 
 for (i in 1:ncol(MoreFive)){
   print(ggplot(MoreFive, aes(x = MoreFive[[i]], y = MoreFive$Months)) +
@@ -209,8 +205,32 @@ for (i in 1:ncol(MoreFive)){
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTW9yZUZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8IDkgJiBNb250aHMgPiA2KVxuXG5mb3IgKGkgaW4gMTpuY29sKE1vcmVGaXZlKSl7XG4gIHByaW50KGdncGxvdChNb3JlRml2ZSwgYWVzKHggPSBNb3JlRml2ZVtbaV1dLCB5ID0gTW9yZUZpdmUkTW9udGhzKSkgK1xuICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgK1xuICAgIGxhYnMoeCA9IGNvbG5hbWVzKE1vcmVGaXZlKVtpXSkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>MoreFive &lt;- filter(data, Months &lt; 9 &amp; Months &gt; 6)
 
-<div id="rmd-source-code">LS0tDQpBdXRob3I6IFN1a2htYW4gVGl3YW5hDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIA0KDQpgYGB7cn0NCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkoZHBseXIpDQpkYXRhIDwtIHJlYWQuY3N2KCIuLi9kYXRhL2NsZWFuX251bV9CUy1CQS5jc3YiKQ0KTGVzc0ZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8PSAzKQ0KDQpmb3IgKGkgaW4gMTpuY29sKExlc3NGaXZlKSl7DQogIHByaW50KGdncGxvdChMZXNzRml2ZSwgYWVzKHggPSBMZXNzRml2ZVtbaV1dLCB5ID0gTGVzc0ZpdmUkTW9udGhzKSkgKw0KICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgKw0KICAgIGxhYnMoeCA9IGNvbG5hbWVzKExlc3NGaXZlKVtpXSkpDQp9DQpgYGANCg0KYGBge3J9DQpNb3JlRml2ZSA8LSBmaWx0ZXIoZGF0YSwgTW9udGhzID4gNSkNCg0KZm9yIChpIGluIDE6bmNvbChNb3JlRml2ZSkpew0KICBwcmludChnZ3Bsb3QoTW9yZUZpdmUsIGFlcyh4ID0gTW9yZUZpdmVbW2ldXSwgeSA9IE1vcmVGaXZlJE1vbnRocykpICsNCiAgICBnZW9tX3Ntb290aChtZXRob2Q9bG0pICsNCiAgICBsYWJzKHggPSBjb2xuYW1lcyhNb3JlRml2ZSlbaV0pKQ0KfQ0KYGBgDQoNCg==</div>
+for (i in 1:ncol(MoreFive)){
+  print(ggplot(MoreFive, aes(x = MoreFive[[i]], y = MoreFive$Months)) +
+    geom_smooth(method=lm) +
+    labs(x = colnames(MoreFive)[i]))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTW9yZUZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8IDEzICYgTW9udGhzID4gOSlcblxuZm9yIChpIGluIDE6bmNvbChNb3JlRml2ZSkpe1xuICBwcmludChnZ3Bsb3QoTW9yZUZpdmUsIGFlcyh4ID0gTW9yZUZpdmVbW2ldXSwgeSA9IE1vcmVGaXZlJE1vbnRocykpICtcbiAgICBnZW9tX3Ntb290aChtZXRob2Q9bG0pICtcbiAgICBsYWJzKHggPSBjb2xuYW1lcyhNb3JlRml2ZSlbaV0pKVxufVxuYGBgIn0= -->
+<pre class="r"><code>MoreFive &lt;- filter(data, Months &lt; 13 &amp; Months &gt; 9)
+
+for (i in 1:ncol(MoreFive)){
+  print(ggplot(MoreFive, aes(x = MoreFive[[i]], y = MoreFive$Months)) +
+    geom_smooth(method=lm) +
+    labs(x = colnames(MoreFive)[i]))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+
+<div id="rmd-source-code">LS0tDQpBdXRob3I6IFN1a2htYW4gVGl3YW5hDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIA0KDQpgYGB7cn0NCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkoZHBseXIpDQpkYXRhIDwtIHJlYWQuY3N2KCIuLi9kYXRhL2NsZWFuX251bS5jc3YiKQ0KTGVzc0ZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8IDMpDQoNCmZvciAoaSBpbiAxOm5jb2woTGVzc0ZpdmUpKXsNCiAgcHJpbnQoZ2dwbG90KExlc3NGaXZlLCBhZXMoeCA9IExlc3NGaXZlW1tpXV0sIHkgPSBMZXNzRml2ZSRNb250aHMpKSArDQogICAgZ2VvbV9zbW9vdGgobWV0aG9kPWxtKSArDQogICAgbGFicyh4ID0gY29sbmFtZXMoTGVzc0ZpdmUpW2ldKSkNCn0NCmBgYA0KDQpgYGB7cn0NCk1vcmVGaXZlIDwtIGZpbHRlcihkYXRhLCBNb250aHMgPCA2ICYgTW9udGhzID4gMykNCg0KZm9yIChpIGluIDE6bmNvbChNb3JlRml2ZSkpew0KICBwcmludChnZ3Bsb3QoTW9yZUZpdmUsIGFlcyh4ID0gTW9yZUZpdmVbW2ldXSwgeSA9IE1vcmVGaXZlJE1vbnRocykpICsNCiAgICBnZW9tX3Ntb290aChtZXRob2Q9bG0pICsNCiAgICBsYWJzKHggPSBjb2xuYW1lcyhNb3JlRml2ZSlbaV0pKQ0KfQ0KYGBgDQoNCmBgYHtyfQ0KTW9yZUZpdmUgPC0gZmlsdGVyKGRhdGEsIE1vbnRocyA8IDkgJiBNb250aHMgPiA2KQ0KDQpmb3IgKGkgaW4gMTpuY29sKE1vcmVGaXZlKSl7DQogIHByaW50KGdncGxvdChNb3JlRml2ZSwgYWVzKHggPSBNb3JlRml2ZVtbaV1dLCB5ID0gTW9yZUZpdmUkTW9udGhzKSkgKw0KICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgKw0KICAgIGxhYnMoeCA9IGNvbG5hbWVzKE1vcmVGaXZlKVtpXSkpDQp9DQpgYGANCg0KYGBge3J9DQpNb3JlRml2ZSA8LSBmaWx0ZXIoZGF0YSwgTW9udGhzIDwgMTMgJiBNb250aHMgPiA5KQ0KDQpmb3IgKGkgaW4gMTpuY29sKE1vcmVGaXZlKSl7DQogIHByaW50KGdncGxvdChNb3JlRml2ZSwgYWVzKHggPSBNb3JlRml2ZVtbaV1dLCB5ID0gTW9yZUZpdmUkTW9udGhzKSkgKw0KICAgIGdlb21fc21vb3RoKG1ldGhvZD1sbSkgKw0KICAgIGxhYnMoeCA9IGNvbG5hbWVzKE1vcmVGaXZlKVtpXSkpDQp9DQpgYGANCg==</div>
 
 
 
