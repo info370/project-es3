@@ -10,8 +10,9 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 
 ```{r}
 library(ggplot2)
+library(dplyr)
 data <- read.csv("../data/clean_num_BS-BA.csv")
-LessFive <- filter(data, Months < 5)
+LessFive <- filter(data, Months <= 3)
 
 for (i in 1:ncol(LessFive)){
   print(ggplot(LessFive, aes(x = LessFive[[i]], y = LessFive$Months)) +

@@ -4,9 +4,11 @@ library(dplyr)
 library(rpart)
 library(rattle)
 
-setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
+#setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
 data <- read.csv('data/clean_num.csv')
+#getwd()
+
 
 # reformat data
 data <- data %>%
@@ -20,7 +22,7 @@ data <- data %>%
   select(-Job_type) %>%
   
   # convert months to classification variable (0 = >3mo., 1 = <3mo.)
-  mutate(Months = ifelse(Months <= 3, 1, 0)) %>%
+  #mutate(Months = ifelse(Months <= 3, 1, 0)) %>%
   
   # split class standing into 5 binary columns
   mutate(freshman = ifelse(class_standing_ == 1, 1, 0)) %>%
@@ -29,7 +31,14 @@ data <- data %>%
   mutate(senior = ifelse(class_standing_ == 4, 1, 0)) %>%
   mutate(fifth.year = ifelse(class_standing_ == 5, 1, 0)) %>%
   mutate(alumni = ifelse(class_standing_ == 6, 1, 0)) %>%
-  select(-class_standing_)
+  select(-class_standing_) %>%
+  
+  #get subset where job found in <= 4 months
+  filter(Months <= 4)
+  
+  #postings per months
+  #mutate(postings_per_month = online_job_postings / Months) %>%
+  #select(-online_job_postings)
 
 # split into training and test datasets
 # (filter out people just beginning job search (no job, searching for < 3 mo.))
@@ -42,7 +51,7 @@ test <- data %>%
   select(-None_of_these, -has_position)
 
 # create decision tree
-tree <- rpart(Months ~ ., data = train, method = "class", control=rpart.control(minbucket=4))
+tree <- rpart(Months ~ ., data = train, method = "anova", control=rpart.control(minbucket=2))
 fancyRpartPlot(tree)
 
 # make predictions
