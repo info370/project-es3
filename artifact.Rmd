@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # Decision Context
-University of Washington students that want to leverage resources and develop skills to have a higher chance of gaining a job offer. Currently students spend majority of their time trying variety of resources without knowing if this will result in a job. Based on our model, we would recommend resources students can use and skills they can expand on to efficiently find a job.
+Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills students can develop and what resources they should use to effectively find a job.
 
 # Model
 
