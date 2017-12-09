@@ -6,6 +6,7 @@ output: html_document
 ---
 
 # Decision Context
+University of Washington students that want to leverage resources and develop skills to have a higher chance of gaining a job offer. Currently students spend majority of their time trying variety of resources without knowing if this will result in a job. Based on our model, we would recommend resources students can use and skills they can expand on to efficiently find a job.
 
 # Model
 
