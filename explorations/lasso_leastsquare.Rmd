@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-install.packages("deplyr")
+install.packages("dplyr")
 library(dplyr)
 library(ggplot2)
 ```
@@ -20,8 +20,8 @@ When you click the **Knit** button a document will be generated that includes bo
 
 **Correlation between Month and Types of Job**
 ```{r cars}
-setwd("/Users/song-euiyul//desktop")
-data <- read.csv("370_clean_suk.csv")
+#setwd("/Users/song-euiyul//desktop")
+data <- read.csv("../data/370_clean_suk.csv")
 View(data)
 colnames(data) <- c("timestamp", "job_type", "position_offer", "month", "career_fair", "job_posting","iCareer", "employer_visit", "linkedin", "third_party", "husky_jobs", "career_workshop", "friends_family", "career_advisor", "platform_used", "ifelse_linkedin", "ifelse_employer_visit", "ifelse_husky_jobs", "ifelse_friends_family", "ifelse_iCareer", "ifelse_employer_website", "ifelse_career_fair", "ifelse_indeed", "ifelse_none_of_these", "num_application", "num_career_fair", "hour_resume", "hour_coverletter", "evaluate_opportunity", "evaluate_writing_resume_coverletter", "evaluate_other_students", "evaluate_networking", "evaluate_interview", "rate_confidence", "num_internship", "cumulative_gpa", "major_gpa", "class_standing", "major", "graduation_date", "gender", "physical_apprearance_gender", "race_ethnicity", "asian", "white", "middle_eastern", "pacific_islander", "black", "native_american", "email")
 

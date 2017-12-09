@@ -1,0 +1,14 @@
+---
+title: "artifact"
+author: "es3"
+date: "December 9, 2017"
+output: html_document
+---
+
+# Decision Context
+
+# Model
+
+# Limitation
+
+# Results
