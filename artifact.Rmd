@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # Decision Context
-Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills students can develop and what resources they should use to effectively find a job.
+Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills you can develop and what resources you can effectively find a job.
 
 # Model
 
