@@ -25,7 +25,7 @@ View(data)
 
 ```
 
-# Method and Decision
+# Scatter Plot
 We also plotted scatter plot of number of students at each month by types of job in order to determine when to stop job searching using same method.
 ```{r}
 output <- ggplot(data = data) +
@@ -33,10 +33,9 @@ output <- ggplot(data = data) +
   labs(title = "Plot of Months by Number of Students in each Type of Job", x = "Types of Job", y = "Months Job Searching Took", size = "Number of People")
 plot(output)
 ```
-# Results 
 The scatter plot is suggesting that spending maximum of 7 months is adequate for job searching. Although some students got an offer spending more than a year, it is highly recommended to change the job searching method if the months spent on job searching passes 7 months.
 
-# Method and Decision 
+# Linear Regression Model
 In order to analyze the job search resources that offer highest rates of job, we implemented linear regression model. Iterating through the variables, we ran simple linear regression model to discover linear relationships between each resource as an input variable and the months of job searching as an output variable.
 ```{r}
 #linear regression for each factor against the outcome variable (months it takes to find job)
@@ -49,10 +48,9 @@ for (i in 1:ncol(data)){
       labs(x = colnames(data)[i]))
 }
 ```
-# Results
 According to the simple linear regression models of resources, too much time input on one resource extends the time of getting a job. However, utilizing employer campus visit, employer website resource, Huskyjobs, and connection decreases the time of receiving an offer.
 
-# Method and Decision
+# Additional Linear Regression
 There was unusual trends in our linear regression that points doubt on our expectation: Better major gpa results in more time of getting a job while cumulative gpa has opposite trends. Of course, it is crucial to maintain high cumulative gpa for employment. However, it is not logical to argue that the higher major gpa postpones the duration of job searching. Therefore, we plotted additional gpa graphs with removed values of 0.0.
 ```{R}
 #additional gpa graphs to remove values of 0.0 for GPA
@@ -66,10 +64,9 @@ ggplot(data, aes(x = cumulative_GPA, y = Months)) +
   xlim(2,4) +
   geom_smooth(method=lm)
 ```
-# Results 
 Unfortunately, there was no change in our results. We maintain that these are our limitations/variables resulted from data collection.
 
-# Method and Decision
+# Lasso Regression
 For multi-feature problem in linear regression, we used L1 regulation Lasso to model mean squared error.
 ```{r}
 
@@ -88,25 +85,22 @@ plot(fit)
 plot(cvfit)
 
 ```
-# Results 
 As lambda increases, the lasso removes more and more coefficients by setting them to zero. Also, there are two minima for graph: around log(lambda) of -1.3 with the number of non-zero coefficient 6 and the log(lambda) of 0 with the number of non-zero coefficient 1. Thus, the model is telling less number of factors makes better result for success in employment.
 
-# Method and Decision
+# Coefficient of Lasso Regression
 We analyzed the coefficient of lasso model in order to observe the pattern.
 ```{r}
 coef(fit)
 ```
-# Results 
 Coefficient of lasso model shows increasing pattern of number of career fairs student attended, despite decreasing pattern of cumulative gpa and number of internship. The number of career fairs, cumulative gpa, and internship are major factors that affects the result of employment.
 
-# Method and Decision
+# Scatter Plot
 We plotted the observation from the coefficeint of lasso model 
 ```{r}
 ggplot(data, aes(x= data$no_career_fairs, y = data$Months)) + geom_point(alpha = .1)
 ggplot(data, aes(x= data$cumulative_GPA, y = data$Months)) + geom_point(alpha = .1)
 ggplot(data, aes(x= data$internships, y = data$Months)) + geom_point(alpha = .1)
 ```
-# Results 
 The graph tells us that more attendance in career fairs results in more number of months to get employed. However, there is an irony behind this explanation: “It is natural phenomenon that time spend on job application increases when a student go to career fair often”. Despite the irony, maintaining high cumulative gpa and internship experience is fatal that cumulative gpa and internships are highly related to the highest rates of job offers.
 
 # Limitation
