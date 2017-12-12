@@ -1,5 +1,5 @@
 ---
-title: "artifact"
+title: "Maximizing Efficiency in Under- and Recent Graduate Job Searching"
 author: "ES3"
 date: "December 9, 2017"
 output: html_document
@@ -22,6 +22,8 @@ data <- read.csv("data/clean_num.csv")
 
 # Decision Context
 Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills you can develop and what resources you can effectively find a job.
+
+As college students nearing the end of our undergraduate careers, all four members of this group understand the pressure that comes with finding entry-level employment. A wide variety of resources are available for University of Washington (UW) iSchool students looking for jobs, including many provided by the iSchool and UW, as well as third party sites like LinkedIn. However, a pilot study we conducted on 26 self-selected participants from the UW iSchool showed that 79.1% still found the job search process to be stressful. Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our target audience is UW Informatics undergraduate students. The main decision we aim to support for this audience is which job search resources students should use in order to get a job offer in the shortest amount of time.
 
 # Model
 
