@@ -1,37 +1,39 @@
 ---
 title: "artifact"
-author: "es3"
+author: "ES3"
 date: "December 9, 2017"
 output: html_document
 ---
+
+```{r, include=FALSE}
+#install.packages("ggplot2")
+#install.packages("glmnet")
+#install.packages("tidyr")
+
+library(ggplot2)
+library(glmnet)
+library(tidyr)
+
+#setwd("~/University of Washington/Senior/Fall/Info 370/project-es3")
+
+data <- read.csv("data/clean_num.csv")
+
+```
 
 # Decision Context
 Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills you can develop and what resources you can effectively find a job.
 
 # Model
 
-```{r setup}
-if(!require(ggplot2)){install.packages("ggplot2", dependencies = c("Depends", "Suggests")); require(glmnet)}
-if(!require(glmnet)){install.packages("glmnet", dependencies = c("Depends", "Suggests")); require(glmnet)}
-if(!require(tidyr)){install.packages("tidyr", dependencies = c("Depends", "Suggests")); require(tidyr)}
-
-
-```
-
-# Look at the data
-```{r}
-data <- read.csv("data/clean_num.csv") #non binary format
-View(data)
-
-```
 
 # Scatter Plot
 First, we plotted scatter plot of a number of the months for job searching by a number of students at each type of job to determine when to stop job searching using the same method.
 ```{r}
-output <- ggplot(data = data) +
+ggplot(data = data) +
   geom_count(mapping = aes(x = Job_type, y = Months), alpha = 1/3) + scale_size_area(max_size = 10) + 
-  labs(title = "Plot of Months by Number of Students in each Type of Job", x = "Types of Job", y = "Months Job Searching Took", size = "Number of People")
-plot(output)
+  labs(title = "Plot of Months by Number of Students in each Type of Job",
+       x = "Types of Job", y = "Months Job Searching Took", size = "Number of People")
+
 ```
 The scatter plot is suggesting that spending maximum of 7 months is adequate for job searching. Although some students got an offer spending more than a year, it is highly recommended to change the job searching method if the months spent on job search passes 7 months.
 
@@ -47,6 +49,7 @@ for (i in 1:ncol(data)){
     geom_smooth(method=lm) +
       labs(x = colnames(data)[i]))
 }
+
 ```
 According to the simple linear regression models of resources, too much time input on one resource extends the time of getting a job. However, utilizing employer campus visit, employer website resource, Huskyjobs, and connection decreases the time of receiving an offer.
 
@@ -63,6 +66,7 @@ ggplot(data, aes(x = cumulative_GPA, y = Months)) +
   geom_point(alpha = 0.1 ) + 
   xlim(2,4) +
   geom_smooth(method=lm)
+
 ```
 Unfortunately, there was no change in our results. We maintain that these are our limitations/variables resulted from data collection.
 
