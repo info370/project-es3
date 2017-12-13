@@ -208,7 +208,7 @@ As lambda increases, the lasso removes more and more coefficients by setting the
 ## Coefficient of Lasso Regression
 We analyzed the coefficient of lasso model in order to observe the pattern.
 ```{r}
-coef(fit)
+head(coef(fit)) [,6:10]
 ```
 The coefficient of lasso model shows increasing pattern of a number of career fairs student attended, despite decreasing pattern of cumulative GPA and number of internships. The number of career fairs, cumulative gpa, and internship is major factors that affect the result of employment.
 
