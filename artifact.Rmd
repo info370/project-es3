@@ -101,7 +101,7 @@ og.tree <- rpart(Months ~ .,
                  control=rpart.control(minbucket=1))
 
 # plot tree
-fancyRpartPlot(og.tree)
+fancyRpartPlot(og.tree, sub = "")
 
 ```
 
@@ -143,7 +143,7 @@ revised.model.data <- data %>%
 revised.tree <- rpart(Months ~ ., data = revised.model.data, method = "anova", control=rpart.control(minbucket=2))
 
 # plot decision tree
-fancyRpartPlot(revised.tree)
+fancyRpartPlot(revised.tree, sub = "")
 
 ```
 
