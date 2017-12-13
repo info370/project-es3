@@ -199,8 +199,15 @@ The coefficient of lasso model shows increasing pattern of a number of career fa
 ## Scatter Plot
 We plotted the observation from the coefficeint of lasso model. 
 ```{r echo = F}
-ggplot(data, aes(x= data$no_career_fairs, y = data$Months)) + geom_point(alpha = .1)
+#internships vs search time
+ggplot(data, aes(x = no_career_fairs, y = Months)) +
+  geom_count(alpha = .5) + 
+  scale_size(range = c(1,4), breaks = c(1:10), guide = guide_legend(title ="Number of Students", ncol = 2)) +
+  geom_smooth(method=lm) + 
+  labs(title = "Job Search Time vs Career Fairs Attended", x = "Number of Career Fairs", y = "Job Search Time (Months)")
 ```
+
+
 The graph tells us that more attendance at career fairs results in a higher number of months to find employment. This most likely just means that people who are initially unsuccessful at finding a job will continue going to career fairs, not that attending more career fairs actually makes the job search take longer. 
 
 # Limitations
