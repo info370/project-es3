@@ -49,7 +49,17 @@ ggplot(data = pilot) +
 
 ```
 
-Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
+Our goal was therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
+
+# Results
+Recommendations to guide immediate actions: 
+* Avoid relying too heavily on online resources like LinkedIn, online job postings, etc.
+* After applying to a lot of online postings (more than around 25), most people spend less time on cover letters and resumes. It's better to invest more effort into fewer applications. 
+* If you are heavily dependent on online resources, solicit your friends/family/professors/etc. to see if anyone has connections to your organizations of interest. Leverage the ones you find.
+* You have to use resources a lot to get offers from them. Doing something a little bit is unlikely to be a good use of time. Instead, pick a few resources and get really good at them.
+
+Recommendations to guide long term planning:
+* A high cumulative GPA and internship experience both correlate with shorter job search times. If you've focused more on one of these areas than the other, you're not doomed. If you haven't focused on either, you should aim to improve in at least one of the two.   
 
 # Model
 Our original model approached our question dividing respondents into two groups: those who accepted a job offer in under 3 months of searching, and those who did not. We chose the 3 month cutoff because about half of respondents fell on one side and half on the other.
@@ -136,54 +146,28 @@ fancyRpartPlot(revised.tree)
 
 ```
 
-While not every aspect of the revised model makes perfect sense, the model's issues - unlike those in the original model - have more to do with our dataset's small sample size than with the model's design itself. See the limitations section for more on this.
+While not every aspect of the revised model makes perfect sense, the model's issues - unlike those in the original model - have more to do with our dataset's small sample size than with the model's design itself. 
 
-# Additional Exploration
-We did a lot of additional exploration on our dataset to supplement the model we created.
-
-## Scatter Plot
+## Supplemental analysis
 First, we plotted scatter plot of a number of the months for job searching by a number of students at each type of job to determine when to stop job searching using the same method.
+
 ```{r}
 ggplot(data = data) +
-  geom_count(mapping = aes(x = Job_type, y = Months), alpha = 1/3) + scale_size_area(max_size = 10) + 
-  labs(title = "Plot of Months by Number of Students in each Type of Job",
-       x = "Types of Job", y = "Months Job Searching Took", size = "Number of People")
+  geom_count(mapping = aes(x = Job_type, y = Months), alpha = 1/3) +     scale_size_area(max_size = 10) + 
+  labs(title = "Plot of Months by Number of Students in each Type of Job", x = "Types of Job", y = "Months Job Searching Took", size = "Number of People")
 
 ```
+
 The scatter plot is suggesting that spending maximum of 7 months is adequate for job searching. Although some students got an offer spending more than a year, it is highly recommended to change the job searching method if the months spent on job search passes 7 months.
 
-## Linear Regression Model
-In order to analyze the job search resources that offer highest rates of a job, we implemented linear regression model. Iterating through the variables, we ran simple linear regression model to discover linear relationships between each resource as an input variable and the months of job searching as an output variable.
-```{r}
-#linear regression for each factor against the outcome variable (months it takes to find job)
-#internship = 1, part time = 2, full time = 3
-#female = 1, male = 0
-for (i in 1:ncol(data)){
-  print(ggplot(data, aes(x = data[[i]], y = Months)) +
-    geom_point(alpha = 0.1) +
-    geom_smooth(method=lm) +
-      labs(x = colnames(data)[i]))
-}
-
-```
-According to the simple linear regression models of resources, too much time input on one resource extends the time of getting a job. However, utilizing employer campus visit, employer website resource, Huskyjobs, and connection decreases the time of receiving an offer.
-
-## Additional Linear Regression
-There was unusual trends in our linear regression that points doubt on our expectation: Better major GPA results in more time of getting a job while cumulative GPA has opposite trends. Of course, it is crucial to maintain high cumulative GPA for employment. However, it is not logical to argue that the higher major GPA postpones the duration of job searching. Therefore, we plotted additional GPA graphs with removed values of 0.0.
 ```{R}
-#additional gpa graphs to remove values of 0.0 for GPA
-ggplot(data, aes(x = in.major_GPA, y = Months)) +
-  geom_point(alpha = 0.1 ) + 
-  xlim(2,4) +
-  geom_smooth(method=lm) 
-
+#GPA vs search time
 ggplot(data, aes(x = cumulative_GPA, y = Months)) +
   geom_point(alpha = 0.1 ) + 
-  xlim(2,4) +
   geom_smooth(method=lm)
 
 ```
-Unfortunately, there was no change in our results. We maintain that these are our limitations/variables resulted from data collection.
+
 
 ## Lasso Regression
 For the multi-feature problem in linear regression, we used L1 regulation Lasso to model mean squared error.
@@ -203,14 +187,13 @@ plot(fit)
 plot(cvfit)
 
 ```
-As lambda increases, the lasso removes more and more coefficients by setting them to zero. Also, there are two minima for graph: around log(lambda) of -1.3 with the number of non-zero coefficient 6 and the log(lambda) of 0 with the number of non-zero coefficient 1. Thus, the model is telling less number of factors makes better result for success in employment.
 
 ## Coefficient of Lasso Regression
 We analyzed the coefficient of lasso model in order to observe the pattern.
 ```{r}
-coef(fit)
+head(coef(fit)) [,6:10]
 ```
-The coefficient of lasso model shows increasing pattern of a number of career fairs student attended, despite decreasing pattern of cumulative GPA and number of internships. The number of career fairs, cumulative gpa, and internship is major factors that affect the result of employment.
+The coefficient of lasso model shows increasing pattern of a number of career fairs student attended, despite decreasing pattern of cumulative GPA and number of internships. The number of career fairs, cumulative gpa, and internship are major factors that impact job searching.
 
 ## Scatter Plot
 We plotted the observation from the coefficeint of lasso model 
@@ -219,11 +202,8 @@ ggplot(data, aes(x= data$no_career_fairs, y = data$Months)) + geom_point(alpha =
 ggplot(data, aes(x= data$cumulative_GPA, y = data$Months)) + geom_point(alpha = .1)
 ggplot(data, aes(x= data$internships, y = data$Months)) + geom_point(alpha = .1)
 ```
-The graph tells us that more attendance at career fairs results in more number of months to get employed. However, there is an irony behind this explanation: It is a natural phenomenon that time spent on job application increases when a student goes to career fair often. Despite the irony, maintaining high cumulative GPA and internship experience is fatal that cumulative GPA and internships are highly related to the highest rates of job offers.
+The graph tells us that more attendance at career fairs results in a higher number of months to find employment. This most likely just means that people who are initially unsuccessful at finding a job will continue going to career fairs, not that attending more career fairs actually makes the job search take longer. Additionally, maintaining a high cumulative GPA and gaining internship experience are related to shorter job searches.  
 
 # Limitations
 
-# Result
-From our analysis we're able to make a few recommendations:
-* Avoid overusing/relying too heavily on online resources like LinkedIn, online job postings, etc.
-* If you are heavily dependent on online resources for one reason or another, solicit your friends/family/professors/etc. and see if anyone has connections to organizations of interest. Leverage the ones you find.
+

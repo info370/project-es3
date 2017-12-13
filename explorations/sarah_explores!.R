@@ -23,6 +23,18 @@ ggplot(no_out, aes(x = networking, y = online_job_postings)) +
   geom_point(alpha = 0.1 ) + 
   geom_smooth(method=loess) 
 
+ggplot(data, aes(x = cumulative_GPA, y = internships)) +
+  geom_point(alpha = 0.1 ) + 
+  geom_smooth(method=loess) 
+
+ggplot(data, aes(x = cumulative_GPA, y = knowledge)) +
+  geom_point(alpha = 0.1 ) + 
+  geom_smooth(method=loess) 
+
+ggplot(data, aes(x = knowledge, y = cumulative_GPA)) +
+  geom_point(alpha = 0.1 ) + 
+  geom_smooth(method=loess) 
+
 ggplot(no_out, aes(x = gender, y = self.confidence)) +
   geom_point(alpha = 0.1 ) + 
   geom_smooth(method=loess) 
