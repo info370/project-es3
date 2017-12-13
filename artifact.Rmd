@@ -52,7 +52,7 @@ ggplot(data = pilot) +
 Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
 
 # Model
-Our original model approached our question as a classification questions. Respondents were segmented into two groups: those who accepted a job offer in under 3 months of searching, and those who did not. We chose the 3 month cutoff because about half of respondents fell on one side and half on the other.
+Our original model approached our question dividing respondents into two groups: those who accepted a job offer in under 3 months of searching, and those who did not. We chose the 3 month cutoff because about half of respondents fell on one side and half on the other.
 
 ```{r}
 og.model.data <- data %>%
@@ -223,7 +223,7 @@ The graph tells us that more attendance at career fairs results in more number o
 
 # Limitations
 
-# Results
+# Result
 From our analysis we're able to make a few recommendations:
 * Avoid overusing/relying too heavily on online resources like LinkedIn, online job postings, etc.
 * If you are heavily dependent on online resources for one reason or another, solicit your friends/family/professors/etc. and see if anyone has connections to organizations of interest. Leverage the ones you find.
