@@ -15,6 +15,8 @@ for (i in 31:38){
 
 #exploring possible correlations in a really inefficient way 
 data <- read.csv('../data/clean_num.csv')
+
+
 no_out <- filter(data, online_job_postings < 500)
 short_search <- filter(data, Months <= 3) 
 
