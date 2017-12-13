@@ -1,5 +1,3 @@
-#install.packages("rattle")
-#install.packages("https://cran.r-project.org/bin/windows/contrib/3.3/RGtk2_2.20.31.zip", repos=NULL)
 library(dplyr)
 library(rpart)
 library(rattle)
@@ -7,8 +5,6 @@ library(rattle)
 #setwd('~/University of Washington/Senior/Fall/Info 370/project-es3')
 
 data <- read.csv('data/clean_num.csv')
-#getwd()
-
 
 # reformat data
 data <- data %>%
@@ -21,9 +17,6 @@ data <- data %>%
   mutate(internship = ifelse(Job_type == 1, 1, 0)) %>%
   select(-Job_type) %>%
   
-  # convert months to classification variable (0 = >3mo., 1 = <3mo.)
-  #mutate(Months = ifelse(Months <= 3, 1, 0)) %>%
-  
   # split class standing into 5 binary columns
   mutate(freshman = ifelse(class_standing_ == 1, 1, 0)) %>%
   mutate(sophomore = ifelse(class_standing_ == 2, 1, 0)) %>%
@@ -35,10 +28,6 @@ data <- data %>%
   
   #get subset where job found in <= 4 months
   filter(Months <= 4)
-  
-  #postings per months
-  #mutate(postings_per_month = online_job_postings / Months) %>%
-  #select(-online_job_postings)
 
 # split into training and test datasets
 # (filter out people just beginning job search (no job, searching for < 3 mo.))
