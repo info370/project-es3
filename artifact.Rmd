@@ -226,3 +226,4 @@ The graph tells us that more attendance at career fairs results in more number o
 # Results
 From our analysis we're able to make a few recommendations:
 * Avoid overusing/relying too heavily on online resources like LinkedIn, online job postings, etc.
+* If you are heavily dependent on online resources for one reason or another, solicit your friends/family/professors/etc. and see if anyone has connections to organizations of interest. Leverage the ones you find.
