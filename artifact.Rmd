@@ -10,6 +10,7 @@ output: html_document
 #install.packages("glmnet")
 #install.packages("tidyr")
 
+library(dplyr)
 library(ggplot2)
 library(glmnet)
 library(tidyr)
@@ -17,13 +18,29 @@ library(tidyr)
 #setwd("~/University of Washington/Senior/Fall/Info 370/project-es3")
 
 data <- read.csv("data/clean_num.csv")
+pilot <- read.csv("data/stress_pilot.csv")
 
 ```
 
 # Decision Context
-Currently University of Washington students spend time between academic work, part or full time jobs, and then finding future positions. Our model focuses on making recommendations on efficently finding the next position by maximizing your efforts and time. The recommendations are about what skills you can develop and what resources you can effectively find a job.
+As college students nearing the end of our undergraduate careers, all four members of this group understand the pressure that comes with finding entry-level employment. And while a wide variety of resources are available to students looking for jobs, a pilot study we conducted on 33 self-selected participants from the University of Washington Information School showed that 78.8% still found the job search process to be stressful to some degree.
 
-As college students nearing the end of our undergraduate careers, all four members of this group understand the pressure that comes with finding entry-level employment. A wide variety of resources are available for University of Washington (UW) iSchool students looking for jobs, including many provided by the iSchool and UW, as well as third party sites like LinkedIn. However, a pilot study we conducted on 26 self-selected participants from the UW iSchool showed that 79.1% still found the job search process to be stressful. Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our target audience is UW Informatics undergraduate students. The main decision we aim to support for this audience is which job search resources students should use in order to get a job offer in the shortest amount of time.
+```{r, echo=FALSE}
+# rename column headers
+colnames(pilot) <- c("class", "stress")
+
+# order class sequentially
+pilot$class <- factor(pilot$class, levels=c("Alumni", "5th year", "Senior", "Junior", "Sophomore"))
+
+# plot stress data
+ggplot(data = pilot) +
+  geom_bar(mapping = aes(x = stress), width = 0.5) +
+  labs(title = "Job Search Stress") +
+  coord_flip(ylim = c(0, nrow(pilot)))
+
+```
+
+Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
 
 # Model
 
