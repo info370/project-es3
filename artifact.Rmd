@@ -6,17 +6,26 @@ output: html_document
 ---
 
 ```{r, include=FALSE}
+# install dependencies
+#install.packages("dplyr")
 #install.packages("ggplot2")
+#install.packages("rpart")
+#install.packages("rattle")
 #install.packages("glmnet")
 #install.packages("tidyr")
 
+# import libraries
 library(dplyr)
 library(ggplot2)
+library(rpart)
+library(rattle)
 library(glmnet)
 library(tidyr)
 
+# set working directory
 #setwd("~/University of Washington/Senior/Fall/Info 370/project-es3")
 
+# load data
 data <- read.csv("data/clean_num.csv")
 pilot <- read.csv("data/stress_pilot.csv")
 
@@ -43,7 +52,89 @@ ggplot(data = pilot) +
 Our goal is therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
 
 # Model
+Our original model approached our question as a classification questions. Respondents were segmented into two groups: those who accepted a job offer in under 3 months of searching, and those who did not. We chose the 3 month cutoff because about half of respondents fell on one side and half on the other.
 
+```{r}
+og.model.data <- data %>%
+  # reformat graduation data as date
+  mutate(graduation_date = as.Date(graduation_date, "%m/%d/%Y")) %>%
+  
+  # split job type into 3 binary columns (1 = internship, 2 = part time, 3 = full time)
+  mutate(fulltime = ifelse(Job_type == 3, 1, 0)) %>%
+  mutate(parttime = ifelse(Job_type == 2, 1, 0)) %>%
+  mutate(internship = ifelse(Job_type == 1, 1, 0)) %>%
+  select(-Job_type) %>%
+  
+  # convert months to classification variable (0 = >3mo., 1 = <3mo.)
+  mutate(Months = ifelse(Months <= 3, 1, 0)) %>%
+  
+  # split class standing into 5 binary columns
+  mutate(freshman = ifelse(class_standing_ == 1, 1, 0)) %>%
+  mutate(sophomore = ifelse(class_standing_ == 2, 1, 0)) %>%
+  mutate(junior = ifelse(class_standing_ == 3, 1, 0)) %>%
+  mutate(senior = ifelse(class_standing_ == 4, 1, 0)) %>%
+  mutate(fifth.year = ifelse(class_standing_ == 5, 1, 0)) %>%
+  mutate(alumni = ifelse(class_standing_ == 6, 1, 0)) %>%
+  select(-class_standing_) %>%
+  
+  # remove test data
+  # (filter out people just beginning job search (no job, searching for < 3 mo.))
+  filter((has_position == 0 & Months == 0) | (None_of_these == 1 & Months == 0) | has_position == 1 | None_of_these == 0) %>%
+  
+  # remove factors that we don't want to predict on
+  select(-None_of_these, -has_position)
+
+# create decision tree
+og.tree <- rpart(Months ~ .,
+                 data = og.model.data, method = "class",
+                 control=rpart.control(minbucket=1))
+
+# plot tree
+fancyRpartPlot(og.tree)
+
+```
+
+Unfortunately, this model didn't particularly make very much sense. For instance, it suggests if you apply to fewer online job postings but use LinkedIn more, you are more likely to accept a job offer in under 3 months. But logically we expect both factors to be a part of the same strategy - perhaps online-based one - and therefore to be directly as opposed to inversely correlated. In the process of meeting with our mentor, it was brought to our attention that the model might be making confusing suggestions becuase it was built on data from individuals who could have pursued multiple strategies in their job search.
+
+Our solution was to analyze only individuals who got offers in the first couple months of their job search under the assumption they would have only had the chance to utilize one strategy. We looked for a natural cutoff in the data but found none so four months was chosen arbitrarily. While this method prevents us from analyzing strategies that did not work it allows us to definitively point to the strategies that did work.
+
+```{r}
+revised.model.data <- data %>%
+  # reformat graduation data as date
+  mutate(graduation_date = as.Date(graduation_date, "%m/%d/%Y")) %>%
+  
+  # split job type into 3 binary columns (1 = internship, 2 = part time, 3 = full time)
+  mutate(fulltime = ifelse(Job_type == 3, 1, 0)) %>%
+  mutate(parttime = ifelse(Job_type == 2, 1, 0)) %>%
+  mutate(internship = ifelse(Job_type == 1, 1, 0)) %>%
+  select(-Job_type) %>%
+  
+  # split class standing into 5 binary columns
+  mutate(freshman = ifelse(class_standing_ == 1, 1, 0)) %>%
+  mutate(sophomore = ifelse(class_standing_ == 2, 1, 0)) %>%
+  mutate(junior = ifelse(class_standing_ == 3, 1, 0)) %>%
+  mutate(senior = ifelse(class_standing_ == 4, 1, 0)) %>%
+  mutate(fifth.year = ifelse(class_standing_ == 5, 1, 0)) %>%
+  mutate(alumni = ifelse(class_standing_ == 6, 1, 0)) %>%
+  select(-class_standing_) %>%
+  
+  # get subset where job found in <= 4 months
+  filter(Months <= 4) %>%
+  
+  # remove test data
+  # (filter out people just beginning job search (no job, searching for < 3 mo.))
+  filter((has_position == 0 & Months == 0) | (None_of_these == 1 & Months == 0) | has_position == 1 | None_of_these == 0) %>%
+  
+  # remove factors that we don't want to predict on
+  select(-None_of_these, -has_position)
+
+# create decision tree
+revised.tree <- rpart(Months ~ ., data = revised.model.data, method = "anova", control=rpart.control(minbucket=2))
+
+# plot decision tree
+fancyRpartPlot(revised.tree)
+
+```
 
 # Scatter Plot
 First, we plotted scatter plot of a number of the months for job searching by a number of students at each type of job to determine when to stop job searching using the same method.
