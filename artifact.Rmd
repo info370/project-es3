@@ -52,13 +52,15 @@ ggplot(data = pilot) +
 Our goal was therefore to illuminate the effectiveness of different job search resources so that students can allocate their time most productively. Our model focuses on making recommendations that minimize excess effort and time spent job searching. These include recommendations about what skills you should develop in the long term and what resources you should use in the short term.
 
 # Key Findings
-Recommendations to guide immediate actions: 
+Recommendations to guide immediate actions:  
+
 * Avoid relying too heavily on online resources like LinkedIn, online job postings, etc.
 * After applying to a lot of online postings (more than around 25), most people spend less time on cover letters and resumes. It's better to invest more effort into fewer applications. 
 * If you are heavily dependent on online resources, solicit your friends/family/professors/etc. to see if anyone has connections to your organizations of interest. Leverage the ones you find.
 * You have to use resources a lot to get offers from them. Doing something a little bit is unlikely to be a good use of time. Instead, pick a few resources to use and get really good at them.
 
 Recommendations to guide long term planning:
+
 * A high cumulative GPA and internship experience both correlate with shorter job search times. If you've focused more on one of these areas than the other, you're not doomed. If you haven't focused on either, you should aim to improve in at least one of the two.   
 * Push yourself to work on developing interpersonal skills. People who said they were good at networking and interviewing tended to have the shortest job searches compared to people who were good at writing cover letters/resumes or were knowledgeable about their area of study.
 
