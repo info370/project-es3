@@ -150,8 +150,7 @@ fancyRpartPlot(revised.tree, sub = "")
 While not every aspect of the revised model makes perfect sense, the model's issues - unlike those in the original model - have more to do with our dataset's small sample size than with the model's design itself. 
 
 ## Supplemental analysis
-A high cumulative GPA and internship experience both correlate with shorter job search times. If you've focused more on one of these areas than the other, you're not doomed. If you haven't focused on either, you should aim to improve in at least one of the two. The correlation is not strong; there are a number of students who find jobs quickly who have a low GPA or no internship experience. However, there is a general pattern that these are two factors that can decrease your job search time.   
-
+A high cumulative GPA and internship experience both correlate with shorter job search times. If you've focused more on one of these areas than the other, you're not doomed. If you haven't focused on either, you should aim to improve in at least one of the two. The correlation is not strong; there are a number of students who find jobs quickly who have a low GPA or no internship experience. However, there is a general pattern that these are two factors that can decrease your job search time.
 
 ```{R echo = F}
 #GPA vs search time
@@ -172,6 +171,7 @@ ggplot(data, aes(x = internships, y = Months)) +
 
 ## Lasso Regression
 For the multi-feature problem in linear regression, we used L1 regulation Lasso to model mean squared error.
+
 ```{r echo = F, warning= F, message = F}
 month <- data[, "Months"]
 
@@ -187,18 +187,22 @@ cvfit <- cv.glmnet(x, y,parallel=TRUE, standardize=TRUE, alpha=1, nlambda=1000)
 plot(cvfit)
 
 ```
+
 The x-axis is log(Lambda) and Lambda is an input to the model fitting process. The value on the top is the number of coefficients for the linear model that are not zero. In our model, the lasso removes more and more coefficients by setting them to zero as lambda incresases. Thus, the model is telling that less number of factors makes better result for success in employment.
 
 ## Coefficient of Lasso Regression
 We analyzed the coefficient of Lasso model in order to observe the pattern.
+
 ```{r echo = F}
 fit <- glmnet(x, y, standardize=TRUE, alpha=1, nlambda=1000)
 head(coef(fit)) [,6:10]
 ```
+
 The coefficient of lasso model shows increasing pattern of a number of career fairs student attended, despite decreasing pattern of cumulative GPA and number of internships. The number of career fairs, cumulative gpa, and internship are major factors that impact job searching. Maintaining a high cumulative GPA and gaining internship experience are related to shorter job searches. 
 
 ## Scatter Plot
-We plotted the observation from the coefficeint of lasso model. 
+We plotted the observation from the coefficeint of lasso model.
+
 ```{r echo = F}
 #internships vs search time
 ggplot(data, aes(x = no_career_fairs, y = Months)) +
@@ -207,7 +211,6 @@ ggplot(data, aes(x = no_career_fairs, y = Months)) +
   geom_smooth(method=lm) + 
   labs(title = "Job Search Time vs Career Fairs Attended", x = "Number of Career Fairs", y = "Job Search Time (Months)")
 ```
-
 
 The graph tells us that more attendance at career fairs results in a higher number of months to find employment. This most likely just means that people who are initially unsuccessful at finding a job will continue going to career fairs, not that attending more career fairs actually makes the job search take longer. 
 
